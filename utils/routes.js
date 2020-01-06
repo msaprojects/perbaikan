@@ -22,8 +22,8 @@ module.exports = function(app){
     // MASALAH
     app.route('/masalah').get(RouteToMasalah.Masalah);
     app.route('/pengguna/:idpengguna').get(RouteToMasalah.detMasalah);
-    app.route('/pengguna').post(RouteToMasalah.tambahMasalah);
-    app.route('/pengguna').put(RouteToMasalah.editMasalah);
-    app.route('/pengguna').delete(RouteToMasalah.hapusMasalah);
+    app.route('/masalah').post(RouteToMasalah.tambahMasalah);
+    app.route('/masalah').put(RouteToMasalah.editMasalah);
+    app.route('/masalah').delete(RouteToMasalah.hapusMasalah);
 
 }

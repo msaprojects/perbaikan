@@ -14,7 +14,7 @@ var connection = require('../utils/connection');
 
 // LIST DATA Mesin
 exports.Mesin = function(req, res){
-    connection.query('SELECT * FROM mesin', function(error, rows, fields){
+    connection.query('SELECT a.*, b.nama as site FROM mesin a, site b where a.idsite=b.idsite', function(error, rows, fields){
         if(error){
             response.servererror(console.log(error), res)
         }else{

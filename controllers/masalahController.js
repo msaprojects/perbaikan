@@ -14,7 +14,7 @@ var connection = require('../utils/connection');
 
 // LIST DATA Masalah
 exports.Masalah = function(req, res){
-    connection.query('SELECT * FROM masalah', function(error, rows, fields){
+    connection.query('SELECT a.*, b.nomesin, c.nama as site FROM masalah a, mesin b, site c where a.idmesin=b.idmesin and b.idsite=c.idsite ', function(error, rows, fields){
         if(error){
             response.servererror(console.log(error), res)
         }else{
@@ -50,8 +50,8 @@ exports.tambahMasalah = function(req, res){
     var idmesin = req.body.idmesin;
     var idpengguna = req.body.idpengguna;
     
-    connection.query('INSERT INTO masalah (keterangan, tanggal, jam, engginer, shift, idmesin, idpengguna) VALUES (?, ?, ?, ?, ?, ?, ?);',
-    [ keterangan, tanggal, jam, engginer, shift, idmesin, idpengguna ],
+    connection.query('INSERT INTO masalah (keterangan, engginer, shift, idmesin, tanggal, jam) VALUES (?, ?, ?, ?, CURDATE(), CURTIME());',
+    [ keterangan, engginer, shift, idmesin ],
         function(error, rows, fields){
             if(error){
                 response.servererror(console.log(error), res)

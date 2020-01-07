@@ -42,16 +42,15 @@ exports.detMasalah = function(req, res){
 // INPUT DATA Masalah
 exports.tambahMasalah = function(req, res){
 
-    var keterangan = req.body.keterangan;
+    var masalah = req.body.masalah;
     var tanggal = req.body.tanggal;
     var jam = req.body.jam;
-    var engginer = req.body.engginer;
-    var shift = req.body.shift;
     var idmesin = req.body.idmesin;
+    var shift = req.body.shift;
     var idpengguna = req.body.idpengguna;
     
-    connection.query('INSERT INTO masalah (keterangan, engginer, shift, idmesin, tanggal, jam) VALUES (?, ?, ?, ?, CURDATE(), CURTIME());',
-    [ keterangan, engginer, shift, idmesin ],
+    connection.query('INSERT INTO masalah (masalah, idmesin, tanggal, jam, shift, timestamp) VALUES (?, ?, ?, ?, ?, now());',
+    [ masalah, idmesin, tanggal, jam, shift ],
         function(error, rows, fields){
             if(error){
                 response.servererror(console.log(error), res)
@@ -64,17 +63,16 @@ exports.tambahMasalah = function(req, res){
 // UPDATE DATA Masalah
 exports.editMasalah = function(req, res){
 
-    var keterangan = req.body.keterangan;
+    var masalah = req.body.masalah;
     var tanggal = req.body.tanggal;
     var jam = req.body.jam;
-    var engginer = req.body.engginer;
     var shift = req.body.shift;
     var idmesin = req.body.idmesin;
     var idpengguna = req.body.idpengguna;
     var idmasalah = req.body.idmasalah;
     
-    connection.query('UPDATE masalah SET keterangan = ?, tanggal = ?, jam = ?, engginer = ?, shift = ?, idMasalah = ?, idpengguna = ? WHERE idmasalah = ?',
-    [ keterangan, tanggal, jam, engginer, shift, idmesin, idpengguna, idmasalah ],
+    connection.query('UPDATE masalah SET masalah = ?, tanggal = ?, jam = ?, idmesin = ?, shift = ? WHERE idmasalah = ?',
+    [ masalah, tanggal, jam, idmesin, shift, idmasalah ],
         function(error, rows, fields){
             if(error){
                 response.servererror(console.log(error), res)

@@ -6,6 +6,9 @@ module.exports = function(app){
     var RouteToMasalah = require('../controllers/masalahController');
     var RouteToSite = require('../controllers/siteController');
     var RouteToProgress = require('../controllers/progressController');
+    var RouteToBarang = require('../controllers/barangController');
+    var RouteToSatuan = require('../controllers/satuanController');
+    var RouteToPenyelesaian = require('../controllers/penyelesaianController');
 
     // PENGGUNA
     app.route('/pengguna').get(RouteToPengguna.Pengguna);
@@ -42,5 +45,14 @@ module.exports = function(app){
     app.route('/progress').put(RouteToProgress.editProgress);
     app.route('/progress').delete(RouteToProgress.hapusProgress);
     app.route('/progress1/:idmasalah').get(RouteToProgress.cProgress);
+
+    //BARANG
+    app.route('/barang').get(RouteToBarang.Barang);
+    app.route('/barang/:idbarang').get(RouteToBarang.detBarang);
+    app.route('/barang').post(RouteToBarang.tambahBarang);
+    app.route('/barang').put(RouteToBarang.editBarang);
+    app.route('/barang').delete(RouteToBarang.hapusBarang);
+
+    //SATUAN
 
 }

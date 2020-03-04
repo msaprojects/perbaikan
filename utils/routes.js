@@ -9,6 +9,14 @@ module.exports = function(app){
     var RouteToBarang = require('../controllers/barangController');
     var RouteToSatuan = require('../controllers/satuanController');
     var RouteToPenyelesaian = require('../controllers/penyelesaianController');
+    var RouteToCheckout = require('../controllers/checkoutController');
+    var RouteToDashboard = require('../controllers/dashboardController');
+    var RouteToKomponen = require('../controllers/komponenController');
+
+    // DASHBOARD
+    app.route('/dashboard').get(RouteToDashboard.Dashboard);
+    app.route('/timeline/:idmasalah').get(RouteToDashboard.Timeline);
+    app.route('/reminder').get(RouteToDashboard.Reminder);
 
     // PENGGUNA
     app.route('/pengguna').get(RouteToPengguna.Pengguna);
@@ -51,8 +59,28 @@ module.exports = function(app){
     app.route('/barang/:idbarang').get(RouteToBarang.detBarang);
     app.route('/barang').post(RouteToBarang.tambahBarang);
     app.route('/barang').put(RouteToBarang.editBarang);
-    app.route('/barang').delete(RouteToBarang.hapusBarang);
+    app.route('/hapusBarang/:idbarang/:idmasalah').get(RouteToBarang.hapusBarang);
 
-    //SATUAN
+    //CHECKOUT
+    app.route('/checkout').get(RouteToCheckout.Checkout);
+    app.route('/checkout/:idmasalah').get(RouteToCheckout.detCheckout);
+    app.route('/checkout').post(RouteToCheckout.tambahCheckout);
+    app.route('/checkout').put(RouteToCheckout.editCheckout);
+    app.route('/checkout').delete(RouteToCheckout.hapusCheckout);
+    app.route('/hapusCheckout/:idcheckout').get(RouteToCheckout.hapusBarangCheckout);
+
+    //PENYELESAIAN
+    app.route('/penyelesaian').get(RouteToPenyelesaian.Penyelesaian);
+    app.route('/penyelesaian/:idpenyelesaian').get(RouteToPenyelesaian.detPenyelesaian);
+    app.route('/penyelesaian').post(RouteToPenyelesaian.tambahPenyelesaian);
+    app.route('/penyelesaian').put(RouteToPenyelesaian.editPenyelesaian);
+    app.route('/penyelesaian').delete(RouteToPenyelesaian.hapusPenyelesaian);
+    app.route('/hapuspenyelesaian/:idmasalah').get(RouteToPenyelesaian.hapusPenyelesaiandanCheckout);
+
+    //KOMPONEN
+    app.route('/komponen').get(RouteToKomponen.Komponen);
+    app.route('/komponen/:idmesin').get(RouteToKomponen.detKomponen);
+    app.route('/komponen/').post(RouteToKomponen.tambahKomponen);
+    app.route('/hapuskomponen/:idkomponen').get(RouteToKomponen.hapusKomponen);
 
 }

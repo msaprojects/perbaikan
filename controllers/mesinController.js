@@ -45,8 +45,8 @@ exports.tambahMesin = function(req, res){
     var keterangan = req.body.keterangan;
     var idsite = req.body.idsite;
     
-    connection.query('INSERT INTO perbaikan.mesin (nomesin, keterangan, idsite) VALUES (?, ?, ?, ?);',
-    [ nomesin, site, keterangan, idsite ],
+    connection.query('INSERT INTO mesin (nomesin, keterangan, idsite) VALUES (?, ?, ?);',
+    [ nomesin, keterangan, idsite ],
         function(error, rows, fields){
             if(error){
                 response.servererror(console.log(error), res)
@@ -61,7 +61,7 @@ exports.editMesin = function(req, res){
 
     var idmesin = req.body.idmesin;
     var nomesin = req.body.nomesin;
-    var idsite = req.body.site;
+    var idsite = req.body.idsite;
     var keterangan = req.body.keterangan;
     
     connection.query('UPDATE mesin SET nomesin = ?, idsite = ?, keterangan = ? WHERE idmesin = ?',

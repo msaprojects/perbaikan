@@ -27,7 +27,8 @@ exports.detPengguna = function(req, res){
 
     var idpengguna = req.params.idpengguna;
 
-    connection.query('SELECT * FROM pengguna where idpengguna = ?', [ idpengguna ],
+    connection.query('SELECT * FROM pengguna where idpengguna = ?',
+    [ idpengguna ],
         function(error, rows, fields){
             if(error){
                 response.forbidden(console.log(error), res)

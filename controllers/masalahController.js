@@ -14,7 +14,7 @@ var connection = require('../utils/connection');
 
 // LIST DATA Masalah
 exports.Masalah = function(req, res){
-    connection.query('SELECT a.*, b.nomesin, c.nama as site FROM masalah a, mesin b, site c where a.idmesin=b.idmesin and b.idsite=c.idsite ', function(error, rows, fields){
+    connection.query("select m.*, ms.nomesin, s.nama as site, ifnull(p.idpenyelesaian,'-') as idpenyelesaian, if(p.idpenyelesaian is null, 0, 1) as status from masalah m left join penyelesaian p on m.idmasalah=p.idmasalah inner join mesin ms on m.idmesin=ms.idmesin inner join site s on ms.idsite=s.idsite;", function(error, rows, fields){
         if(error){
             response.servererror(console.log(error), res)
         }else{

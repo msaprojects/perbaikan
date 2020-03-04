@@ -14,7 +14,7 @@ var connection = require('../utils/connection');
 
 // LIST DATA Satuan
 exports.Barang = function(req, res){
-    connection.query('SELECT b.*, s.nama as satuan FROM barang b, satuan s where b.idsatuan=s.idsatuan', function(error, rows, fields){
+    connection.query('SELECT b.*, b.BB_SATUAN as satuan FROM bb b', function(error, rows, fields){
         if(error){
             response.servererror(console.log(error), res)
         }else{
@@ -27,7 +27,7 @@ exports.detBarang = function(req, res){
 
     var idbarang = req.params.idbarang;
 
-    connection.query('SELECT * FROM barang where idbarang = ?',
+    connection.query('SELECT * FROM bb where BB_ID = ?',
     [ idbarang ],
         function(error, rows, fields){
             if(error){
@@ -48,7 +48,7 @@ exports.tambahBarang = function(req, res){
     var keterangan = req.body.keterangan;
     var idsatuan = req.body.idsatuan;
     
-    connection.query('INSERT INTO barang (kode, nama, umur_pakai, keterangan, idsatuan) VALUES (?, ?, ?, ?, ?);',
+    connection.query('INSERT INTO bb (kode, nama, umur_pakai, keterangan, idsatuan) VALUES (?, ?, ?, ?, ?);',
     [ kode, nama, umur_pakai, keterangan, idsatuan ],
         function(error, rows, fields){
             if(error){
@@ -83,7 +83,7 @@ exports.editBarang = function(req, res){
 // HAPUS DATA Satuan
 exports.hapusBarang = function(req, res){
     
-    var idbarang = req.body.idbarang;
+    var idbarang = req.params.idbarang;
 
     connection.query('DELETE FROM barang where idbarang = ?',
     [ idbarang ],
